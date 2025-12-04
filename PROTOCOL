@@ -1,0 +1,36 @@
+# Protocolo de gestión
+
+Este documento establece las reglas y el flujo de trabajo para la gestión de las tareas dentro del repositorio. 
+
+---
+
+## 1. Asignación de taaeas (Responsabilidad y Alcance)
+
+Todo trabajo que se inicie debe tener un responsable y estar correctamente clasificado dentro de los hitos del proyecto.
+
+* Toda Issue debe tener un Responsable que se hará cargo de su ejecución de principio a fin.
+* Toda Issue debe estar vinculada a un Milestone (`Entrega I - 30%` o `Entrega II - 70%`) para delimitar el alcance de la entrega actual.
+* Toda Issue debe tener una etiqueta de estimación (`Size: S`, `Size: M`, `Size: L`).
+
+---
+
+## 2. Actualización de estado
+
+* El responsable de la Issue  s el único autorizado para moverla entre las columnas del board (`To do`, `In Progress`, `Review`, `Done`)
+
+---
+
+## 3. Vinculo con el código
+
+* La historia del código y la historia de la tarea deben estar permanentemente conectadas.
+
+* Todas las Pull Requests deben vincularse a la Issue correspondiente que están resolviendo.
+
+* Para asegurar que GitHub cierre automáticamente la Issue al aceptar la PR, se debe incluir una de las siguientes palabras clave seguida del número de Issue en la descripción de la PR:
+    * `Closes #<NumeroDeIssue>`
+    * `Fixes #<NúmeroDeIssue>`
+    * `Resolves #<NúmeroDeIssue>`
+
+**Ejemplo de Commit/PR:**
+
+Fixes #40 - Configuración inicial del pipeline de CD para el Backend
