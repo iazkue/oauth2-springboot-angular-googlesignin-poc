@@ -1,6 +1,5 @@
 package com.aghairsalon.resourceserver.config;
 
-import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.gen.RSAKeyGenerator;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +16,7 @@ public class TestSecurityConfig {
         RSAKey rsaJwk = new RSAKeyGenerator(2048)
                 .keyID("test-key")
                 .generate();
-        JWKSet jwkSet = new JWKSet(rsaJwk.toPublicJWK());
+
         // build a decoder from the public key
         return NimbusJwtDecoder.withPublicKey(rsaJwk.toRSAPublicKey()).build();
     }
