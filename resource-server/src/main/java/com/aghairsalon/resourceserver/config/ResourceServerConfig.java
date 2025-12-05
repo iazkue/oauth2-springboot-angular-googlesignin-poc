@@ -34,11 +34,12 @@ public class ResourceServerConfig {
         return http
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> {
-                    if (decoder != null) {
-                        oauth2.jwt(jwt -> jwt.decoder(decoder));
-                    } else {
-                        oauth2.jwt(Customizer.withDefaults());
-                    }
+                    oauth2.jwt(jwt -> {
+                        if (decoder != null) {
+                            jwt.decoder(decoder);
+                        }
+                        jwt.jwtAuthenticationConverter(jwtAuthenticationConverter());
+                    });
                 })
                 .build();
     }
