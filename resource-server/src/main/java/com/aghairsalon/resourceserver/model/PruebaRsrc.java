@@ -1,5 +1,6 @@
 package com.aghairsalon.resourceserver.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +19,8 @@ public class PruebaRsrc {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String userKey;
+
+    @Column(name = "value_")
     private String value;
 
 }
