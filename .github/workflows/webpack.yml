@@ -26,5 +26,4 @@ jobs:
       working-directory: ag-prueba-front
       run: |
         npm install
-        npm install --save-dev webpack webpack-cli
-        npx webpack
+        npm run build
