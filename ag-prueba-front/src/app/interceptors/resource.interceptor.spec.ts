@@ -1,14 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
+import { ResourceInterceptor } from './resource.interceptor';
+import { TokenService } from '../services/token.service';
 
-import { resourceInterceptor } from './resource.interceptor';
-
-describe('resourceInterceptor', () => {
-  const interceptor: HttpInterceptorFn = (req, next) => 
-    TestBed.runInInjectionContext(() => resourceInterceptor(req, next));
+describe('ResourceInterceptor', () => {
+  let interceptor: ResourceInterceptor;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    const tokenServiceSpy = jasmine.createSpyObj('TokenService', ['getAccessToken']);
+
+    TestBed.configureTestingModule({
+      providers: [
+        ResourceInterceptor,
+        { provide: TokenService, useValue: tokenServiceSpy }
+      ]
+    });
+    interceptor = TestBed.inject(ResourceInterceptor);
   });
 
   it('should be created', () => {
