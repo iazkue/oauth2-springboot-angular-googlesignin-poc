@@ -15,6 +15,7 @@ jobs:
       pull-requests: write # Necesario para añadir etiquetas y comentarios
       issues: write        # También para añadir etiquetas y comentarios
       contents: read       # Necesario para el checkout
+      packages: write
 
     steps:
       - name: Checkout code
@@ -109,3 +110,15 @@ jobs:
                 }
               }
             }
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          server-id: github # Esto debe coincidir con el <id> en tu pom.xml
+          settings-path: ${{ github.workspace }} # Crea un settings.xml temporal
+
+      - name: Publish to GitHub Packages
+        run: mvn --batch-mode deploy -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub usa esto para autenticar el 'deploy'
