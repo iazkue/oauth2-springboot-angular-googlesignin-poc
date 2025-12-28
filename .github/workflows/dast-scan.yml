@@ -1,0 +1,15 @@
+name: DAST Scan (OWASP ZAP)
+
+on:
+  deployment_status: # Se ejecuta cuando el despliegue termina con éxito
+
+jobs:
+  zap_scan:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.12.0
+        with:
+          target: 'https://tu-app-desplegada.com' # La URL de tu servidor de recursos o auth
+          artifact_name: 'zap_scan_report'
