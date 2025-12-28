@@ -37,6 +37,5 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        # Añadimos el directorio de trabajo donde está el pom.xml
         working-directory: ./authorization-server
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=iazkue_oauth2-springboot-angular-googlesignin-poc
