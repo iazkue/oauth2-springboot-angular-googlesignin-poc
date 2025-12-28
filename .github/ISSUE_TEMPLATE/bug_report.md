@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-## Descripción del Bug
+## Descripción del bug
 Una descripción clara y concisa de lo que es el error.
 
 ## Pasos para reproducir
