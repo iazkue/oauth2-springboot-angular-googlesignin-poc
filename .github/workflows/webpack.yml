@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: ['20.19', '22.12']
 
     steps:
     - uses: actions/checkout@v4
@@ -21,6 +21,12 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+
+    - name: Verify Node and NPM versions
+      working-directory: ag-prueba-front
+      run: |
+        node -v
+        npm -v
 
     - name: Build
       working-directory: ag-prueba-front
