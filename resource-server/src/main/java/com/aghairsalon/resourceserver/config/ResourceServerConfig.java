@@ -32,7 +32,11 @@ public class ResourceServerConfig {
         });
 
         return http
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth
+                        // Permite acceso sin token a los endpoints de monitoreo
+                        .requestMatchers("/actuator/**", "/favicon.ico").permitAll()
+                        // El resto de la API sigue requiriendo autenticación
+                        .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> {
                     oauth2.jwt(jwt -> {
                         if (decoder != null) {
