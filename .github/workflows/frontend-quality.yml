@@ -1,4 +1,4 @@
-name: Frontend Quality & Security (OKR 3 & 4)
+name: Calidad y seguridad frontend
 
 on:
   push:
@@ -21,11 +21,11 @@ jobs:
           cache: 'npm'
           cache-dependency-path: './ag-prueba-front/package-lock.json'
 
-      - name: Install dependencies
+      - name: Instalar dependencias
         run: npm ci
         working-directory: ./ag-prueba-front
 
-      - name: Run Linting (OKR 3)
+      - name: Ejecutar Linting
         run: npm run lint
         working-directory: ./ag-prueba-front
 
