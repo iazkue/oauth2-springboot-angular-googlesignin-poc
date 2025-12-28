@@ -167,6 +167,30 @@ public class AuthorizationSecurityConfig {
 //    }
 
     @Bean
+    @Order(2)
+    public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.cors(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/auth/**", "/client/**", "/actuator/**")); // Añadido actuator a CSRF ignore
+        
+        FederatedIdentityConfigurer federatedIdentityConfigurer = new FederatedIdentityConfigurer()
+                .oauth2UserHandler(new UserRepositoryOAuth2UserHandler(googleUserRepository));
+                
+        http
+                .authorizeHttpRequests(authorize ->
+                        authorize
+                                .requestMatchers("/auth/**", "/client/**", "/login", "/actuator/**").permitAll() // Permitir acceso a métricas
+                                .anyRequest().authenticated()
+                )
+                .formLogin(login -> login.loginPage("/login"))
+                .oauth2Login(login -> login.loginPage("/login")
+                        .successHandler(authenticationSuccessHandler()))
+                .apply(federatedIdentityConfigurer);
+                
+        http.logout(logout -> logout.logoutSuccessUrl("http://127.0.0.1:4200/logout"));
+        return http.build();
+    }
+
+    @Bean
     public AuthorizationServerSettings authorizationServerSettings(){
         return AuthorizationServerSettings.builder().issuer("http://localhost:9000").build();
     }
