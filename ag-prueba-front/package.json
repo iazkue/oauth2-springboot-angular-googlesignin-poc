@@ -15,7 +15,7 @@
     "webpack-dev-server": "5.2.1"
   },
   "dependencies": {
-    "@angular-eslint/schematics": "^1.0.0",
+    "@angular-eslint/schematics": "^21.2.0",
     "@angular/animations": "^18.2.0",
     "@angular/common": "^18.2.0",
     "@angular/compiler": "^18.2.0",
